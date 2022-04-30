@@ -1,10 +1,12 @@
 const { Client} = require('discord.js');
 const firstMessage = require("./firstMessage");
-const ROLE_CHAN_ID = '933429806635294780';
+const ROLE_CHAN_ID = '933687641298325574';
+
+//add explaination
 const emojis = {
-    bard: "bard",
-    wizard: "wizard",
-    fairy: "fairy"
+    Netrunner: 'Netrunner',
+    CyberdelicJester: 'CyberdelicJester',
+    eBlacksmith: 'eBlacksmith',
 }
 let messageToReact = "Hi sir !\nI'm the lady of the Lake and I'll help you in your quests. The first one is to pick your area of interest for contribution.\nChose between those character please \n"
 
@@ -19,7 +21,7 @@ let messageToReact = "Hi sir !\nI'm the lady of the Lake and I'll help you in yo
     const { guild } = reaction.message;
 
     const roleName = emojis[emoji];
-
+    console.log(roleName)
     if (!roleName) {return}
     const role = guild.roles.cache.find(role => role.name === roleName);
     if (!role) {return}
@@ -27,7 +29,7 @@ let messageToReact = "Hi sir !\nI'm the lady of the Lake and I'll help you in yo
 
     if (add) {
         member.roles.add(role);
-        member.send("You should check the Broceliande space that just appeared.")
+        // member.send("You should check the Broceliande space that just appeared.")
     } else {
         member.roles.remove(role);
     }
@@ -42,14 +44,14 @@ module.exports = (client) => {
     const channel = client.channels.cache.find((channel) => channel.id === ROLE_CHAN_ID);
     const getEmoji = (emojiName) => client.emojis.cache.find((emoji) => emoji.name === emojiName)
     
-    
     let reactions = [];
     for (let key in emojis){
         let emoji = getEmoji(emojis[key]);
-        if (!emoji ) return;
+        // console.log(emoji)
+        if (emoji !== emoji ) return;
         
         reactions.push(emoji);
-        messageToReact += `${emoji} : ${emojis[key]}\n`
+        messageToReact += `${emoji} : ${emojis[key]} \n`
     }
     firstMessage(channel, messageToReact, reactions);
 

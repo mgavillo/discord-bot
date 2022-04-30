@@ -44,6 +44,7 @@ const editFirstMessage = (messages, text, reactions) => {
  */
 
 module.exports = (channel, text, reactions) => {
+    // console.log("hello world")
     channel.messages.fetch().then(messages => {
         if (messages.size === 0)
             initFirstMessage(channel, text, reactions);
